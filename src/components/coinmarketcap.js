@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as CoinmarketcapActions from '../actions/coinmarketcap';
+import * as MapActions from '../actions/map';
 import Loader from './loader';
 
 class Coinmarketcap extends Component {
@@ -11,16 +12,16 @@ class Coinmarketcap extends Component {
         this.decideCurrency = this.decideCurrency.bind(this);
     }
     componentWillMount() {
-        this.props.action.startLoadingBTCCoinmarketcap();
+        this.props.actions.coinmarketcap.startLoadingBTCCoinmarketcap();
         switch(this.props.coinmarketcap.selectedCurrency) {
           case "EUR":
-            this.props.action.getBTCCoinmarketcapEUR();
+            this.props.actions.coinmarketcap.getBTCCoinmarketcapEUR();
             break;
           case "GBP":
-            this.props.action.getBTCCoinmarketcapGBP();
+            this.props.actions.coinmarketcap.getBTCCoinmarketcapGBP();
             break;
           default:
-            this.props.action.getBTCCoinmarketcapUSD();
+            this.props.actions.coinmarketcap.getBTCCoinmarketcapUSD();
             break;
         }
     }
@@ -55,7 +56,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        action: bindActionCreators(CoinmarketcapActions, dispatch)
+        actions: {
+          coinmarketcap: bindActionCreators(CoinmarketcapActions, dispatch),
+          map: bindActionCreators(MapActions, dispatch)
+        }
     }
 }
 

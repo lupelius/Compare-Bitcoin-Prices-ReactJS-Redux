@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as CoinmarketcapActions from '../actions/coinmarketcap';
 import * as CoindeskActions from '../actions/coindesk';
+import * as MapActions from '../actions/map';
 
 class Currencies extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class Currencies extends Component {
         //coinmarketcap
         this.props.coinmarketcapAction.getBTCCoinmarketcapEUR();
         this.props.coindeskAction.changeCurrencyToEUR();
+        this.props.mapAction.changeViewLatLonEUR();
     }
     changeCurrencyGBP() {
         this.props.coinmarketcapAction.changeCurrencyToGBP();
@@ -26,6 +28,7 @@ class Currencies extends Component {
         //coinmarketcap
         this.props.coinmarketcapAction.getBTCCoinmarketcapGBP();
         this.props.coindeskAction.changeCurrencyToGBP();
+        this.props.mapAction.changeViewLatLonGBP();
     }
     changeCurrencyUSD() {
         this.props.coinmarketcapAction.changeCurrencyToUSD();
@@ -33,6 +36,7 @@ class Currencies extends Component {
         //coinmarketcap's coinmarketcapAction, but not coindesk's one
         this.props.coinmarketcapAction.getBTCCoinmarketcapUSD();
         this.props.coindeskAction.changeCurrencyToUSD();
+        this.props.mapAction.changeViewLatLonUS();
     }
 
     render() {
@@ -54,7 +58,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         coinmarketcapAction: bindActionCreators(CoinmarketcapActions, dispatch),
-        coindeskAction: bindActionCreators(CoindeskActions, dispatch)
+        coindeskAction: bindActionCreators(CoindeskActions, dispatch),
+        mapAction: bindActionCreators(MapActions, dispatch)
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Currencies);

@@ -9,7 +9,7 @@ function returnData(type, data){
 export function getBTCCoinmarketcapEUR() {
     return(dispatch)=>{
         return axios.get("https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=EUR").then((response)=>{
-            setTimeout(dispatch(returnData("FULLFILL_GET_BTC_CMC", response.data[0])),3000)
+            dispatch(returnData("FULLFILL_GET_BTC_CMC", response.data[0]))
             ;
         })
     }
@@ -17,14 +17,14 @@ export function getBTCCoinmarketcapEUR() {
 export function getBTCCoinmarketcapGBP() {
     return(dispatch)=>{
         return axios.get("https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=GBP").then((response)=>{
-            setTimeout(dispatch(returnData("FULLFILL_GET_BTC_CMC", response.data[0])),3000);
+            dispatch(returnData("FULLFILL_GET_BTC_CMC", response.data[0]));
         })
     }
 }
 export function getBTCCoinmarketcapUSD() {
     return(dispatch)=>{
         return axios.get("https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=USD").then((response)=>{
-            setTimeout(dispatch(returnData("FULLFILL_GET_BTC_CMC", response.data[0])),3000);
+            dispatch(returnData("FULLFILL_GET_BTC_CMC", response.data[0]));
         })
     }
 }

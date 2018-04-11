@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as CoindeskActions from '../actions/coindesk';
+import * as MapActions from '../actions/map';
 import Loader from './loader';
 
 class Coindesk extends Component {
@@ -11,8 +12,8 @@ class Coindesk extends Component {
         this.decideCurrency = this.decideCurrency.bind(this);
     }
     componentWillMount() {
-        this.props.action.startLoadingBTCCoindesk();
-        this.props.action.getBTCCoindesk();
+        this.props.actions.coindesk.startLoadingBTCCoindesk();
+        this.props.actions.coindesk.getBTCCoindesk();
     }
     decideCurrency(cur) {
       switch(cur) {
@@ -47,7 +48,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        action: bindActionCreators(CoindeskActions, dispatch)
+        actions: {
+          coindesk: bindActionCreators(CoindeskActions, dispatch),
+          map: bindActionCreators(MapActions, dispatch)
+        }
     }
 }
 
